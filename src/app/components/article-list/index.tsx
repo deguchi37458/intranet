@@ -1,27 +1,13 @@
 import Link from "next/link";
 
-export function ArticleList(): JSX.Element {
-  const articles = [
-    {
-      id: 1,
-      emoji: "😷",
-      title: "コロナ対応",
-    },
-    {
-      id: 2,
-      emoji: "💻",
-      title: "リモートワーク",
-    },
-    {
-      id: 3,
-      emoji: "🤱",
-      title: "育児休暇",
-    },
-  ];
+import { prisma } from "@/lib/prisma";
+
+export async function ArticleList() {
+  const articles = await prisma.Article.findMany();
 
   return (
     <div className="flex gap-20">
-      {articles.map((article) => {
+      {articles.map((article: any) => {
         return (
           <article key={article.id}>
             <Link href="/" className="flex items-center gap-5">

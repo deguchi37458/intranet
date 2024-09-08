@@ -9,8 +9,8 @@ datasource db {
   directUrl         = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Post {
-  id          Int    @id @default(autoincrement())
-  title       String
-  description String
+model Article {
+  id        Int      @id @default(autoincrement())
+  emoji     String
+  title     String
 }
