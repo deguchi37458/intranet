@@ -1,16 +1,23 @@
 import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
+import ArticleType from "@/types/article";
+
+interface ArticleType {
+  id: number;
+  emoji: string;
+  title: string;
+}
 
 export async function ArticleList() {
   const articles = await prisma.Article.findMany();
 
   return (
     <div className="flex gap-20">
-      {articles.map((article: any) => {
+      {articles.map((article: ArticleType) => {
         return (
           <article key={article.id}>
-            <Link href="/" className="flex items-center gap-5">
+            <Link href={{ pathname: `/articles/${article.id}/` }} className="flex items-center gap-5">
               <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-white">
                 <span className="text-5xl">{article.emoji}</span>
               </div>
