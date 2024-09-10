@@ -10,7 +10,7 @@ interface ArticleType {
 }
 
 export async function ArticleList() {
-  const articles = await prisma.Article.findMany();
+  const articles = await prisma.article.findMany();
 
   return (
     <div className="flex gap-20">
