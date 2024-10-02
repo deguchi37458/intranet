@@ -9,12 +9,12 @@ CREATE TABLE "Post" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "idd" SERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "username" TEXT NOT NULL,
     "nickname" TEXT NOT NULL,
     "email" TEXT NOT NULL,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("idd")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
