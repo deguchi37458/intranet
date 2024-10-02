@@ -1,7 +1,6 @@
 import "./globals.css";
 
-import { Footer } from "@/app/components/footer";
-import { Header } from "@/app/components/header";
+import NextAuthSession from "@/app/components/ nextAuthSession";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,11 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <NextAuthSession>
+        <body>{children}</body>
+      </NextAuthSession>
     </html>
   );
 }

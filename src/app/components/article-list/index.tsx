@@ -12,7 +12,7 @@ interface ArticleType {
 }
 
 export async function ArticleList() {
-  const articles = await prisma.article.findMany();
+  const articles = await prisma.post.findMany();
 
   return (
     <div className="grid gap-6">
