@@ -3,6 +3,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ArticleType from "@/types/article";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 interface ArticleType {
   id: number;
   emoji: string;
@@ -13,16 +15,22 @@ export async function ArticleList() {
   const articles = await prisma.article.findMany();
 
   return (
-    <div className="flex gap-20">
+    <div className="grid gap-6">
       {articles.map((article: ArticleType) => {
         return (
           <article key={article.id}>
-            <Link href={{ pathname: `/articles/${article.id}/` }} className="flex items-center gap-5">
-              <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-white">
-                <span className="text-5xl">{article.emoji}</span>
-              </div>
-              <div>
-                <p className="font-bold">{article.title}</p>
+            <Link href="/" className="flex items-start space-x-4 rounded-lg bg-white p-4 shadow">
+              <Avatar className="h-20 w-20">
+                <AvatarImage src={`/placeholder-jpg`} alt="Article image" />
+                <AvatarFallback>{article.emoji}</AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <h3 className="mb-1 text-lg font-semibold">{article.title}</h3>
+                <p className="mb-2 text-sm text-gray-500">Author Name • 3 days ago</p>
+                <div className="flex items-center space-x-2 text-sm text-gray-400">
+                  <span>👍 24</span>
+                  <span>💬 5</span>
+                </div>
               </div>
             </Link>
           </article>
