@@ -13,8 +13,6 @@ export default function Welcome() {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
 
-  console.log(session?.user?.email);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetch("/api/user", {
