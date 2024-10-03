@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 
+import { useSession } from "next-auth/react";
+
 import { Container } from "@/app/components/container";
 
 export default function Home() {
+  const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
 
@@ -15,7 +18,7 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, emoji }),
+      body: JSON.stringify({ title, emoji, username: session?.user.username }),
     });
 
     if (res.ok) {
