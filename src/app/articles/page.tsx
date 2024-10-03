@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 import { useSession } from "next-auth/react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Container } from "@/app/components/container";
+import { Footer } from "@/app/components/footer";
+import { Header } from "@/app/components/header";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -30,18 +37,39 @@ export default function Home() {
   };
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">タイトル:</label>
-          <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-        </div>
-        <div>
-          <label htmlFor="emoji">絵文字:</label>
-          <input type="text" id="emoji" value={emoji} onChange={(e) => setEmoji(e.target.value)} required />
-        </div>
-        <button type="submit">投稿</button>
-      </form>
-    </Container>
+    <>
+      <Header />
+      <main className="bg-gray-100">
+        <Container>
+          <form onSubmit={handleSubmit} className="py-[50px]">
+            <div className="mb-4">
+              <Input
+                type="text"
+                id="title"
+                value={title}
+                placeholder="Title"
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <Textarea className="min-h-[500px]" placeholder="Type your message here."></Textarea>
+            </div>
+            <div className="mb-4">
+              <Input
+                type="text"
+                id="emoji"
+                placeholder="Emoji"
+                value={emoji}
+                onChange={(e) => setEmoji(e.target.value)}
+                required
+              />
+            </div>
+            <Button type="submit">投稿</Button>
+          </form>
+        </Container>
+      </main>
+      <Footer />
+    </>
   );
 }
