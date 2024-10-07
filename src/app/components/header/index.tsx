@@ -10,8 +10,9 @@ import { Container } from "@/app/components/container";
 
 export function Header(): JSX.Element {
   const { data: session } = useSession();
+
   return (
-    <header className="py-2">
+    <header className="py-4">
       <Container>
         <div className="flex items-center justify-between">
           <div>
@@ -19,11 +20,19 @@ export function Header(): JSX.Element {
           </div>
           <div>
             {session ? (
-              <Button>
-                <Link href="/articles">投稿する</Link>
-              </Button>
+              <div className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage src={session.user.image || "/default-avatar.png"} alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <Button>
+                  <Link href="/articles">投稿する</Link>
+                </Button>
+              </div>
             ) : (
-              <Button onClick={() => signIn("google")}>Login</Button>
+              <div className="flex items-center gap-5">
+                <Button onClick={() => signIn("google")}>Login</Button>
+              </div>
             )}
           </div>
         </div>
