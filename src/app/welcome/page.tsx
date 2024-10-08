@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
+import Kv from "@@/public/assets/images/welcome/kv.svg";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
@@ -33,14 +35,29 @@ export default function Welcome() {
 
   return (
     <main>
-      <Container>
-        <h2>Welcome!</h2>
+      <div className="mx-auto my-0 w-[420px] py-20">
+        <div className="mb-10 flex justify-center">
+          <Image src={Kv} width={320} height={320} alt="welcome!" />
+        </div>
+        <h1 className="mb-10 text-center font-Inter text-5xl font-semibold">Welcome!</h1>
         <form onSubmit={handleSubmit}>
-          <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-          <Input type="text" placeholder="Nickname" value={nickname} onChange={(e) => setNickname(e.target.value)} />
+          <Input
+            className="mb-5"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            className="mb-5"
+            type="text"
+            placeholder="Nickname"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
           <Button type="submit">プロフィール設定</Button>
         </form>
-      </Container>
+      </div>
     </main>
   );
 }
