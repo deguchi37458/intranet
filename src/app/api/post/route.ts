@@ -8,6 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const user = await prisma.post.create({
       data: {
+        id: data.postId,
         emoji: data.emoji,
         title: data.title,
         username: data.username,

@@ -15,17 +15,19 @@ datasource db {
 }
 
 model Post {
-  id        Int    @default(autoincrement()) @id
-  emoji     String
-  title     String
-  username  String
-  user      User   @relation(fields: [username], references: [username])
+  id              String  @id
+  emoji           String
+  title           String
+  published       Boolean     @default(false)
+  created_at      DateTime    @default(now())
+  username        String
+  user            User    @relation(fields: [username], references: [username])
 }
 
 model User {
-  id        Int     @default(autoincrement()) @id
-  username  String  @unique
-  nickname  String
-  email     String  @unique
-  posts     Post[]
+  id              Int  @default(autoincrement()) @id
+  username        String  @unique
+  nickname        String
+  email           String  @unique
+  posts           Post[]
 }

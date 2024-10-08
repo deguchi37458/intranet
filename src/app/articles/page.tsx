@@ -18,14 +18,24 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
 
+  function generateRandomId(length: number): string {
+    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
+    const postId = generateRandomId(10);
     e.preventDefault();
     const res = await fetch("/api/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, emoji, username: session?.user.username }),
+      body: JSON.stringify({ postId, title, emoji, username: session?.user.username }),
     });
 
     if (res.ok) {

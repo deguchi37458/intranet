@@ -1,23 +1,22 @@
 import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
-import ArticleType from "@/types/article";
+import { Post } from "@prisma/client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-interface ArticleType {
-  id: number;
-  emoji: string;
-  title: string;
-  username: string;
-}
-
 export async function ArticleList() {
-  const articles = await prisma.post.findMany();
+  const articles = await prisma.post.findMany({
+    orderBy: {
+      created_at: "desc",
+    },
+  });
 
   return (
     <div className="grid gap-6">
-      {articles.map((article: ArticleType) => {
+      {articles.map((article: Post) => {
+        const createdAtFormatted = new Date(article.created_at).toLocaleDateString();
+
         return (
           <article key={article.id}>
             <Link
@@ -30,7 +29,9 @@ export async function ArticleList() {
               </Avatar>
               <div className="flex-1">
                 <h3 className="mb-1 text-lg font-semibold">{article.title}</h3>
-                <p className="mb-2 text-sm text-gray-500">{article.username} • 3 days ago</p>
+                <p className="mb-2 text-sm text-gray-500">
+                  {article.username} • {createdAtFormatted}
+                </p>
                 <div className="flex items-center space-x-2 text-sm text-gray-400">
                   <span>👍 24</span>
                   <span>💬 5</span>
