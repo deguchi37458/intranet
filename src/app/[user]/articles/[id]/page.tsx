@@ -6,16 +6,7 @@ import { Container } from "@/app/components/container";
 import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
 
-// export async function generateStaticParams() {
-//   const articles = await fetchLacne(`lacne/api/article/lists.php`, null, null);
-
-//   return articles.items.map((post: any) => ({
-//     id: post.id,
-//     page: post.page,
-//   }));
-// }
-
-export default async function Page({ params }: { params: { user: string; id: number } }) {
+export default async function Page({ params }: { params: { user: string; id: string } }) {
   const post = await prisma.post.findUnique({
     where: {
       username: params.user,

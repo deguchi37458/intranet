@@ -5,16 +5,16 @@ import { Post } from "@prisma/client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export async function ArticleList() {
-  const articles = await prisma.post.findMany({
-    orderBy: {
-      created_at: "desc",
-    },
-  });
+type Props = {
+  post: Post[];
+};
+
+export async function ArticleList(props: Props) {
+  const posts = props.post;
 
   return (
     <div className="grid gap-6">
-      {articles.map((article: Post) => {
+      {posts.map((article: Post) => {
         const createdAtFormatted = new Date(article.created_at).toLocaleDateString();
 
         return (
