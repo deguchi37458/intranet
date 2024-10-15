@@ -17,6 +17,11 @@ export default function Home() {
   const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
+  const [showPicker, setShowPicker] = useState(false);
+
+  const togglePicker = () => {
+    setShowPicker(!showPicker);
+  };
 
   function generateRandomId(length: number): string {
     const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -65,15 +70,24 @@ export default function Home() {
             <div className="mb-4">
               <Textarea className="min-h-[500px]" placeholder="Type your message here."></Textarea>
             </div>
-            <div className="mb-4">
-              <Input
-                type="text"
-                id="emoji"
-                placeholder="Emoji"
-                value={emoji}
-                onChange={(e) => setEmoji(e.target.value)}
-                required
-              />
+            <div className="relative mb-4">
+              <Button type="button" onClick={togglePicker}>
+                <label>{emoji ? emoji : "アイキャッチを選択してください"}</label>
+                <Input
+                  className="invisible absolute"
+                  type="text"
+                  id="emoji"
+                  placeholder="Emoji"
+                  value={emoji}
+                  onChange={(e) => setEmoji(e.target.value)}
+                  required
+                />
+              </Button>
+              <div className="absolute">
+                {showPicker && (
+                  <Picker data={data} onEmojiSelect={(selectedEmoji: any) => setEmoji(selectedEmoji.native)} />
+                )}
+              </div>
             </div>
             <Button type="submit">投稿</Button>
           </form>
