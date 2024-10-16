@@ -16,7 +16,9 @@ export function Header(): JSX.Element {
       <Container>
         <div className="flex items-center justify-between">
           <div>
-            <h1>header</h1>
+            <h1>
+              <Link href="/">header</Link>
+            </h1>
           </div>
           <div>
             {session ? (
