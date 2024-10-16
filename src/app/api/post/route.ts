@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
         id: data.postId,
         emoji: data.emoji,
         title: data.title,
+        content: data.markdown,
         username: data.username,
       },
     });

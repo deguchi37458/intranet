@@ -48,7 +48,7 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ postId, title, emoji, username: session?.user.username }),
+      body: JSON.stringify({ postId, title, emoji, markdown, username: session?.user.username }),
     });
 
     if (res.ok) {

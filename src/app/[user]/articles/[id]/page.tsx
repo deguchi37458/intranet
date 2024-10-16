@@ -1,6 +1,9 @@
 import React from "react";
 
 import { prisma } from "@/lib/prisma";
+import MarkdownIt from "markdown-it";
+
+import "zenn-content-css";
 
 import { Container } from "@/app/components/container";
 import { Footer } from "@/app/components/footer";
@@ -14,6 +17,8 @@ export default async function Page({ params }: { params: { user: string; id: str
     },
   });
 
+  const md = new MarkdownIt();
+
   return (
     <>
       <Header />
@@ -26,7 +31,10 @@ export default async function Page({ params }: { params: { user: string; id: str
                 <h1 className="my-5 text-4xl font-bold">{post?.title}</h1>
               </div>
               <div className="bg-white p-6">
-                <p>ここに内容が入る</p>
+                <div
+                  className="znc"
+                  dangerouslySetInnerHTML={{ __html: post?.content ? md.render(post?.content) : "" }}
+                ></div>
               </div>
             </Container>
           </article>
