@@ -4,11 +4,15 @@ import React, { useState } from "react";
 
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import MarkdownIt from "markdown-it";
 import { useSession } from "next-auth/react";
+
+import "zenn-content-css";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Container } from "@/app/components/container";
 import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
@@ -18,6 +22,10 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
   const [showPicker, setShowPicker] = useState(false);
+  const [markdown, setMarkdown] = useState<string>("");
+  const md = new MarkdownIt();
+
+  const [preview, setPreview] = useState(false);
 
   const togglePicker = () => {
     setShowPicker(!showPicker);
@@ -54,11 +62,13 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="bg-gray-100">
+      <main>
         <Container>
           <form onSubmit={handleSubmit} className="py-[50px]">
             <div className="mb-4">
               <Input
+                style={{ outline: "none" }}
+                className="w-[700px] bg-white focus-visible:ring-0"
                 type="text"
                 id="title"
                 value={title}
@@ -67,29 +77,66 @@ export default function Home() {
                 required
               />
             </div>
-            <div className="mb-4">
-              <Textarea className="min-h-[500px]" placeholder="Type your message here."></Textarea>
-            </div>
-            <div className="relative mb-4">
-              <Button type="button" onClick={togglePicker}>
-                <label>{emoji ? emoji : "アイキャッチを選択してください"}</label>
-                <Input
-                  className="invisible absolute"
-                  type="text"
-                  id="emoji"
-                  placeholder="Emoji"
-                  value={emoji}
-                  onChange={(e) => setEmoji(e.target.value)}
-                  required
-                />
-              </Button>
-              <div className="absolute">
-                {showPicker && (
-                  <Picker data={data} onEmojiSelect={(selectedEmoji: any) => setEmoji(selectedEmoji.native)} />
-                )}
+
+            <div className="flex justify-between">
+              <div className="overflow-hidden">
+                <div
+                  className="flex w-[700px] transition-transform duration-300"
+                  style={{
+                    transform: preview ? "translateX(-100%)" : "translateX(0)",
+                  }}
+                >
+                  {/* Editor */}
+                  <div className="min-w-[700px]">
+                    <Textarea
+                      className="min-h-[500px] resize-none bg-white focus-visible:ring-0"
+                      value={markdown}
+                      onChange={(e) => setMarkdown(e.target.value)}
+                      placeholder="Enter Markdown here..."
+                    ></Textarea>
+                  </div>
+                  {/* Preview */}
+                  <div className="min-w-[700px]">
+                    <div
+                      className="znc min-h-[500px] bg-white px-3 py-2"
+                      dangerouslySetInnerHTML={{ __html: markdown ? md.render(markdown) : "" }}
+                    />
+                  </div>
+                </div>
               </div>
+              <aside className="sticky">
+                <div className="relative mb-4">
+                  <ToggleGroup
+                    type="single"
+                    value={preview ? "b" : "a"}
+                    onValueChange={(value) => setPreview(value === "b")}
+                  >
+                    <ToggleGroupItem value="a">Editor</ToggleGroupItem>
+                    <ToggleGroupItem value="b">Preview</ToggleGroupItem>
+                  </ToggleGroup>
+                </div>
+                <div className="relative mb-4">
+                  <Button type="button" onClick={togglePicker}>
+                    <label>{emoji ? emoji : "🗒️"}</label>
+                    <Input
+                      className="invisible absolute"
+                      type="text"
+                      id="emoji"
+                      placeholder="Emoji"
+                      value={emoji}
+                      onChange={(e) => setEmoji(e.target.value)}
+                      required
+                    />
+                  </Button>
+                  <div className="absolute">
+                    {showPicker && (
+                      <Picker data={data} onEmojiSelect={(selectedEmoji: any) => setEmoji(selectedEmoji.native)} />
+                    )}
+                  </div>
+                </div>
+                <Button type="submit">投稿</Button>
+              </aside>
             </div>
-            <Button type="submit">投稿</Button>
           </form>
         </Container>
       </main>
