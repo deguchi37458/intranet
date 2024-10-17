@@ -7,6 +7,7 @@ import { signIn } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/app/components/container";
+import { NewPostButton } from "@/app/components/NewPostButton";
 
 export async function Header() {
   const session = await getServerSession(authOptions);
@@ -27,9 +28,7 @@ export async function Header() {
                   <AvatarImage src={session.user.image || "/default-avatar.png"} alt="@shadcn" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <Button>
-                  <Link href="/articles">投稿する</Link>
-                </Button>
+                <NewPostButton />
               </div>
             ) : (
               <div className="flex items-center gap-5">
