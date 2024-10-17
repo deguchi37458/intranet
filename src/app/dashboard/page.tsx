@@ -12,6 +12,7 @@ import { Header } from "@/app/components/header";
 export default function Dashboard() {
   return (
     <>
+      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <Container>

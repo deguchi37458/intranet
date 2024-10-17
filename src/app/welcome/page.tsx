@@ -1,17 +1,15 @@
-"use client";
-
 import { useState } from "react";
 import Image from "next/image";
 
 import Kv from "@@/public/assets/images/welcome/kv.svg";
-import { useSession } from "next-auth/react";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth/next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Container } from "@/app/components/container";
 
-export default function Welcome() {
-  const { data: session } = useSession();
+export default async function Welcome() {
+  const session = await getServerSession(authOptions);
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
 

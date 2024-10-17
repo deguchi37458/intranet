@@ -1,15 +1,15 @@
-"use client";
-
 import Link from "next/link";
 
-import { signIn, useSession } from "next-auth/react";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth/next";
+import { signIn } from "next-auth/react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/app/components/container";
 
-export function Header(): JSX.Element {
-  const { data: session } = useSession();
+export async function Header() {
+  const session = await getServerSession(authOptions);
 
   return (
     <header className="py-4">

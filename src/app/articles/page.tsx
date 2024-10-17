@@ -1,11 +1,10 @@
-"use client";
-
 import React, { useState } from "react";
 
+import { authOptions } from "@/lib/auth";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import MarkdownIt from "markdown-it";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
 
 import "zenn-content-css";
 
@@ -17,8 +16,8 @@ import { Container } from "@/app/components/container";
 import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
 
-export default function Home() {
-  const { data: session } = useSession();
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
   const [showPicker, setShowPicker] = useState(false);
@@ -61,6 +60,7 @@ export default function Home() {
 
   return (
     <>
+      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <Container>
