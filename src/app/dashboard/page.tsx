@@ -1,15 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
+import Link from "next/link";
 
-import { Bell, ChevronDown, FileText, Plus } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { ChevronDown, FileText, Plus } from "lucide-react";
+import { getServerSession } from "next-auth/next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { Container } from "@/app/components/container";
 import { Header } from "@/app/components/header";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const session = await getServerSession(authOptions);
+
+  const post = await prisma.post.findMany({
+    where: {
+      username: session?.user.username,
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+  console.log(post);
+
+  function formatDate(date: Date) {
+    const createdAtFormatted = new Date(date).toLocaleDateString();
+    return createdAtFormatted;
+  }
+
+  function formatPublished(published: boolean) {
+    if (published) {
+      return "公開中";
+    } else {
+      return "下書き";
+    }
+  }
+
   return (
     <>
       {/* @ts-expect-error Server Component */}
@@ -35,45 +62,26 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div>
-                  {[
-                    {
-                      title: "僕もZennのようなサービスが作りたい",
-                      status: "下書き",
-                      updated: "6日前に本文更新",
-                      words: "389字",
-                    },
-                    { title: "GSAPのpinを使ったときは", status: "下書き", updated: "20日前に本文更新", words: "0字" },
-                    {
-                      title: "Next.js × Nest.jsの環境をDockerで作成する",
-                      status: "公開中",
-                      updated: "1ヶ月前に本文更新",
-                      words: "5477字",
-                    },
-                    {
-                      title: "いちばんやさしい非同期処理 〜Promiseとasync/await〜",
-                      status: "下書き",
-                      updated: "1ヶ月前に本文更新",
-                      words: "961字",
-                    },
-                  ].map((article, index) => (
+                  {post.map((article, index) => (
                     <div key={index}>
-                      <div className="flex items-center justify-between p-4 hover:bg-accent hover:text-accent-foreground">
-                        <div>
-                          <h3 className="font-medium">{article.title}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            {article.status} • {article.updated} • {article.words}
-                          </p>
+                      <Link href={`/articles/${article.id}/edit`}>
+                        <div className="flex items-center justify-between p-4 hover:bg-accent hover:text-accent-foreground">
+                          <div>
+                            <h3 className="font-medium">{article.title}</h3>
+                            <p className="text-sm text-muted-foreground">
+                              {formatPublished(article.published)} • {formatDate(article.created_at)}
+                            </p>
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button>
+                              <FileText className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon">
+                              <ChevronDown className="h-4 w-4" />
+                            </Button>
+                          </div>
                         </div>
-                        <div className="flex space-x-2">
-                          <Button variant="ghost" size="icon">
-                            <FileText className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon">
-                            <ChevronDown className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </div>
-                      {index < 3 && <Separator />}
+                      </Link>
                     </div>
                   ))}
                 </div>

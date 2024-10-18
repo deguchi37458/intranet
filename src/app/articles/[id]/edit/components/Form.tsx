@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import MarkdownIt from "markdown-it";
-import { Session } from "next-auth"; // Session型をインポート
+import { Session } from "next-auth";
 
 import "zenn-content-css";
 
@@ -24,7 +24,7 @@ export function Form(props: Props) {
   const [title, setTitle] = useState("");
   const [emoji, setEmoji] = useState("");
   const [showPicker, setShowPicker] = useState(false);
-  const [markdown, setMarkdown] = useState<string>("");
+  const [markdown, setMarkdown] = useState("");
   const md = new MarkdownIt();
 
   const [preview, setPreview] = useState(false);
@@ -40,7 +40,7 @@ export function Form(props: Props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ postId: props.id, title, emoji, markdown, username: props.session?.user.username }),
+      body: JSON.stringify({ postId: props.id, emoji, title, markdown, username: props.session?.user.username }),
     });
 
     if (res.ok) {
