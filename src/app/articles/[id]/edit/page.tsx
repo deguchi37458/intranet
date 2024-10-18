@@ -4,9 +4,9 @@ import { authOptions } from "@/lib/auth";
 import { Session } from "next-auth";
 import { getServerSession } from "next-auth/next";
 
-import { Container } from "@/app/components/container";
-import { Footer } from "@/app/components/footer";
-import { Header } from "@/app/components/header";
+import { Container } from "@/app/components/Container";
+import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/Header";
 
 import { Form } from "./components/Form";
 
@@ -23,7 +23,6 @@ export default async function EditPage({ params }: { params: { id: string } }) {
           <Form session={session} id={id} />
         </Container>
       </main>
-      <Footer />
     </>
   );
 }

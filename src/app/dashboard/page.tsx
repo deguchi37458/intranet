@@ -8,8 +8,8 @@ import { getServerSession } from "next-auth/next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Container } from "@/app/components/container";
-import { Header } from "@/app/components/header";
+import { Container } from "@/app/components/Container";
+import { Header } from "@/app/components/Header";
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
@@ -22,7 +22,6 @@ export default async function Dashboard() {
       created_at: "desc",
     },
   });
-  console.log(post);
 
   function formatDate(date: Date) {
     const createdAtFormatted = new Date(date).toLocaleDateString();

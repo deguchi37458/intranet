@@ -1,4 +1,4 @@
-import { Container } from "@/app/components/container";
+import { Container } from "@/app/components/Container";
 
 export function Footer(): JSX.Element {
   return (

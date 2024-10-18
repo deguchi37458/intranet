@@ -2,10 +2,10 @@ import React from "react";
 
 import { prisma } from "@/lib/prisma";
 
-import { ArticleList } from "@/app/components/article-list";
-import { Container } from "@/app/components/container";
-import { Footer } from "@/app/components/footer";
-import { Header } from "@/app/components/header";
+import { ArticleList } from "@/app/components/ArticleList";
+import { Container } from "@/app/components/Container";
+import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/Header";
 
 export default async function Page({ params }: { params: { user: string } }) {
   const user = await prisma.user.findUnique({

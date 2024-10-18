@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Container } from "@/app/components/container";
+import { Container } from "@/app/components/Container";
 import { NewPostButton } from "@/app/components/NewPostButton";
 
 export async function Header() {

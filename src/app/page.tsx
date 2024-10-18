@@ -2,11 +2,11 @@ import React from "react";
 
 import { prisma } from "@/lib/prisma";
 
-import { ArticleList } from "@/app/components/article-list";
-import { Container } from "@/app/components/container";
-import { Footer } from "@/app/components/footer";
-import { Header } from "@/app/components/header";
-import { SecTitle } from "@/app/components/sec-title";
+import { ArticleList } from "@/app/components/ArticleList";
+import { Container } from "@/app/components/Container";
+import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/Header";
+import { SecTitle } from "@/app/components/SecTitle";
 
 export default async function Home() {
   const post = await prisma.post.findMany({

@@ -5,9 +5,9 @@ import MarkdownIt from "markdown-it";
 
 import "zenn-content-css";
 
-import { Container } from "@/app/components/container";
-import { Footer } from "@/app/components/footer";
-import { Header } from "@/app/components/header";
+import { Container } from "@/app/components/Container";
+import { Footer } from "@/app/components/Footer";
+import { Header } from "@/app/components/Header";
 
 export default async function Page({ params }: { params: { user: string; id: string } }) {
   const post = await prisma.post.findUnique({

@@ -104,7 +104,7 @@ export function Form(props: Props) {
             </ToggleGroup>
           </div>
           <div className="relative mb-4">
-            <Button type="button" onClick={togglePicker}>
+            <Button variant="outline" type="button" onClick={togglePicker}>
               <label>{emoji ? emoji : "🗒️"}</label>
               <Input
                 className="invisible absolute"
@@ -122,7 +122,9 @@ export function Form(props: Props) {
               )}
             </div>
           </div>
-          <Button type="submit">投稿</Button>
+          <Button variant="destructive" type="submit">
+            投稿
+          </Button>
         </aside>
       </div>
     </form>
