@@ -7,6 +7,7 @@ import { Session } from "next-auth";
 
 import "zenn-content-css";
 
+import { ArticleType } from "@/types/article";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
@@ -17,14 +18,15 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 type Props = {
   session: Session | null;
-  id: string;
+  post: ArticleType | null;
+  id: String;
 };
 
-export function Form(props: Props) {
-  const [title, setTitle] = useState("");
-  const [emoji, setEmoji] = useState("");
+export function Form({ session, post, id }: Props) {
+  const [title, setTitle] = useState(post ? post.title : "");
+  const [emoji, setEmoji] = useState(post ? post.emoji : "");
   const [showPicker, setShowPicker] = useState(false);
-  const [markdown, setMarkdown] = useState("");
+  const [markdown, setMarkdown] = useState(post ? post.content : "");
   const md = new MarkdownIt();
 
   const [preview, setPreview] = useState(false);
@@ -35,12 +37,19 @@ export function Form(props: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const res = await fetch("/api/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ postId: props.id, emoji, title, markdown, username: props.session?.user.username }),
+      body: JSON.stringify({
+        postId: post ? post?.id : id,
+        emoji,
+        title,
+        markdown,
+        username: session?.user.username,
+      }),
     });
 
     if (res.ok) {
