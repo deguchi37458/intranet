@@ -10,7 +10,6 @@ type Props = {
 
 export async function ArticleList(props: Props) {
   const posts = props.post;
-  console.log(posts);
 
   return (
     <div className="grid gap-6">

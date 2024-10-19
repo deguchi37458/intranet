@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
         title: data.title,
         content: data.markdown,
         username: data.username,
+        nickname: data.nickname,
       },
       create: {
         id: data.postId,
@@ -20,6 +21,7 @@ export async function POST(req: NextRequest) {
         title: data.title,
         content: data.markdown,
         username: data.username,
+        nickname: data.nickname,
       },
     });
     return NextResponse.json(post, { status: 200 });
