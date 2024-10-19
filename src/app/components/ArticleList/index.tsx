@@ -10,6 +10,7 @@ type Props = {
 
 export async function ArticleList(props: Props) {
   const posts = props.post;
+  console.log(posts);
 
   return (
     <div className="grid gap-6">
@@ -29,7 +30,7 @@ export async function ArticleList(props: Props) {
               <div className="flex-1">
                 <h3 className="mb-1 text-lg font-semibold">{article.title}</h3>
                 <p className="mb-2 text-sm text-gray-500">
-                  {article.username} • {createdAtFormatted}
+                  {article.nickname} • {createdAtFormatted}
                 </p>
                 <div className="flex items-center space-x-2 text-sm text-gray-400">
                   <span>👍 24</span>

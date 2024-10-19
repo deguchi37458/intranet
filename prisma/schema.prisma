@@ -22,6 +22,7 @@ model Post {
   published       Boolean     @default(false)
   created_at      DateTime    @default(now())
   username        String
+  nickname        String
   user            User    @relation(fields: [username], references: [username])
 }
 

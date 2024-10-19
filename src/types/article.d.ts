@@ -6,4 +6,5 @@ export interface ArticleType {
   published: boolean;
   created_at: Date;
   username: string;
+  nickname: string;
 }

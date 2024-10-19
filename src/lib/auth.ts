@@ -9,11 +9,13 @@ type ClientType = {
 declare module "next-auth" {
   interface User {
     username: string;
+    nickname: string;
   }
   interface Session extends DefaultSession {
     user: {
       id: number;
       username: string;
+      nickname: string;
     } & DefaultSession["user"];
   }
 }
@@ -44,6 +46,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         session.user.id = user.id;
         session.user.username = user.username;
+        session.user.nickname = user.nickname;
       }
       return session;
     },
