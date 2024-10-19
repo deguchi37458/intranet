@@ -18,7 +18,7 @@ export async function Header() {
         <div className="flex items-center justify-between">
           <div>
             <h1>
-              <Link href="/">header</Link>
+              <Link href="/">ZennのようなWebアプリ</Link>
             </h1>
           </div>
           <div>
