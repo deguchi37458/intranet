@@ -21,7 +21,6 @@ export default async function EditPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <Container>
