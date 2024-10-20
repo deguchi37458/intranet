@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Container } from "@/app/components/Container";
-import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 
 export default function Home() {
@@ -140,7 +139,6 @@ export default function Home() {
           </form>
         </Container>
       </main>
-      <Footer />
     </>
   );
 }

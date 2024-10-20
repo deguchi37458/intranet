@@ -6,7 +6,6 @@ import MarkdownIt from "markdown-it";
 import "zenn-content-css";
 
 import { Container } from "@/app/components/Container";
-import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 
 export default async function Page({ params }: { params: { user: string; id: string } }) {
@@ -40,7 +39,6 @@ export default async function Page({ params }: { params: { user: string; id: str
           </article>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

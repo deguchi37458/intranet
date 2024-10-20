@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 
 import { ArticleList } from "@/app/components/ArticleList";
 import { Container } from "@/app/components/Container";
-import { Footer } from "@/app/components/Footer";
 import { Header } from "@/app/components/Header";
 
 export default async function Page({ params }: { params: { user: string } }) {
@@ -35,7 +34,6 @@ export default async function Page({ params }: { params: { user: string } }) {
           </Container>
         </div>
       </main>
-      <Footer />
     </>
   );
 }
