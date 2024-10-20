@@ -8,7 +8,6 @@ import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Container } from "@/app/components/container";
 
 export default function Welcome() {
   const { data: session } = useSession();
