@@ -49,6 +49,7 @@ export function Form({ session, post, id }: Props) {
         title,
         markdown,
         username: session?.user.username,
+        nickname: session?.user.nickname,
       }),
     });
 
