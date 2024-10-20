@@ -15,6 +15,10 @@ export default async function Home() {
     },
   });
 
+  if (!post) {
+    throw new Error("エラーが発生しました。");
+  }
+
   return (
     <>
       {/* @ts-expect-error Server Component */}
