@@ -25,7 +25,6 @@ export default async function Page({ params }: { params: { user: string } }) {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <div className="bg-gray-100 py-12">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { prisma } from "@/lib/prisma";
 import { Post } from "@prisma/client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

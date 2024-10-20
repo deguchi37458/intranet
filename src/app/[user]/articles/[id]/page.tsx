@@ -21,7 +21,6 @@ export default async function Page({ params }: { params: { user: string; id: str
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <section>

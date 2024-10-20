@@ -38,7 +38,6 @@ export default async function Dashboard() {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <Container>

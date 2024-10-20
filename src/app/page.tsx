@@ -21,7 +21,6 @@ export default async function Home() {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <Header />
       <main>
         <section className="bg-gray-100 py-12">
