@@ -6,6 +6,8 @@ import { ArticleList } from "@/app/components/ArticleList";
 import { Container } from "@/app/components/Container";
 import { Header } from "@/app/components/Header";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const post = await prisma.post.findMany({
     orderBy: {
